@@ -1,6 +1,5 @@
 import shutil
 import requests
-import urllib.request
 import os
 
 
