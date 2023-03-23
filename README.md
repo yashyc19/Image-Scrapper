@@ -1,6 +1,6 @@
 # Image Scrapper
 
-This is a python based image scraping bot that will extract and download images as per users' input.
+This is a python based image scraping bot that will extract and download images as per users' request.
 
 ## Installation
 
