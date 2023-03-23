@@ -1,35 +1,47 @@
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
+import fileManager as fm
 import os
 import time
 
 
 
-def browserSetup():
+def driverSetup():
     driverPath = os.getcwd() + '\\drivers\\chromedriver.exe'    # Path to chromedriver.exe
-    bravePath = "C:\\Program Files\\BraveSoftware\\Brave-Browser\\Application\\brave.exe"   # Path to brave.exe
+    browserPath = "C:\\Program Files\\BraveSoftware\\Brave-Browser\\Application\\brave.exe"   # Path to brave.exe
     options = webdriver.ChromeOptions()   # Create options object
-    options.binary_location = bravePath  # Set binary location to brave.exe
-    browser = webdriver.Chrome(service=Service(driverPath), options=options) # Create browser object
-    return browser # Return browser object
+    options.binary_location = browserPath  # Set binary location to brave.exe
+    driver = webdriver.Chrome(service=Service(driverPath), options=options) # Create browser object
+    return driver # Return browser object
 
-limit = int(input("Enter limit: "))
 
-driver = browserSetup() # Create browser object
-url = "https://duckduckgo.com/?q=children+playing+in+the+park&t=h_&iar=images&iax=images&ia=images" # URL to scrape
-driver.implicitly_wait(5) # Wait 5 seconds for page to load
-driver.maximize_window() # Maximize window
-driver.get(url)
-
-count = 0
-driver.find_element("class name", "js-lazyload").click()
-for _ in range(limit):
-    driver.find_element("class name", "js-detail-next").click()
+def scrapeImages(searchLink, limit, outputFileName):    # url, limit, outputFileName
+    driver = driverSetup() # Create browser object
+    driver.implicitly_wait(5) # Wait 5 seconds for page to load
+    driver.maximize_window() # Maximize window
+    driver.get(searchLink)
     
-    time.sleep(0.15)
-    count += 1
-print(f"Scraped {count} images")
-print("program run successfullly")
-time.sleep(5) # Wait 5 seconds for page to load
+    try:
+        count = 0
+        driver.find_element("class name", "js-lazyload").click()
+        while count < limit:
+            # extract image link and store in a text file
+            link = driver.find_element("class name", "js-detail-img-high").get_attribute("src")
+            fm.addToFile(outputFileName, link)            
+            driver.find_element("class name", "js-detail-next").click()
+            time.sleep(0.15)
+            count += 1
 
-# https://duckduckgo.com/?q=gigi+hadid&t=h_&iar=images&iax=images&ia=images
+    except Exception as err:
+        print("An error occured: ", err)
+        return
+
+    finally:
+        print(f"Scraped {count} images")
+
+        driver.close()
+        driver.quit()
+
+
+
+    
