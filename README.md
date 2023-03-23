@@ -35,6 +35,9 @@ The script will display the update log in the terminal itself.
 All the data will be stored in the `textfiles/<filename>` and `images/<filename>`
 
 Some glimpses:
+![project file manager](assets/scrapperFileManager.png)
+![Gigi Hadid Demo](assets/gigiHadidDemo.png)
+![Elon Musk Demo](assets/elonMuskDemo.png)
 
 
 ## Remember
