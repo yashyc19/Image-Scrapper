@@ -5,7 +5,6 @@ import os
 import time
 
 
-
 def driverSetup():
     driverPath = os.getcwd() + '\\drivers\\chromedriver.exe'    # Path to chromedriver.exe
     browserPath = "C:\\Program Files\\BraveSoftware\\Brave-Browser\\Application\\brave.exe"   # Path to brave.exe
@@ -16,6 +15,7 @@ def driverSetup():
 
 
 def scrapeImages(searchLink, limit, outputFileName):    # url, limit, outputFileName
+    print('Log: Scraping images...')
     driver = driverSetup() # Create browser object
     driver.implicitly_wait(5) # Wait 5 seconds for page to load
     driver.maximize_window() # Maximize window
@@ -37,11 +37,7 @@ def scrapeImages(searchLink, limit, outputFileName):    # url, limit, outputFile
         return
 
     finally:
-        print(f"Scraped {count} images")
-
+        print(f"Log: Scraped {count} images")
+        print(f"Log: Added links to {outputFileName}.txt")
         driver.close()
         driver.quit()
-
-
-
-    
