@@ -2,31 +2,44 @@
 
 This is a python based image scraping bot that will extract and download images as per users' request.
 
+## Working
+
+In order to run the tool there are few main components required
+- a webdriver (here i have used chromedriver) based on your system and available browser
+- necessary libraries to implement the code
+- the code itself
+
 ## Installation
 
-You might also need some modules (if not installed, such as selenium, urllib3, etc)
-```
-py -m pip install -r requirements.txt
-```
+You will need to download your own [Selemium Webdriver](https://www.selenium.dev/documentation/webdriver/)
+(for better experience and less bugs)
 
-You also might need to download your own [ChromeDriver](https://chromedriver.chromium.org/downloads)
-(for better experience and less bugs) 
+In order to have all the modules (if not installed, such as selenium, requests, shutil, etc), run the following command
+```
+pip install -r requirements.txt
+``` 
 
 ## Usage
 
-After downloading the [ChromeDriver](https://chromedriver.chromium.org/downloads), move the .exe file in the webdriver folder.
-Do download proper supported version of driver according to your device
+After downloading the [Selemium Webdriver](https://www.selenium.dev/documentation/webdriver/), move the .exe file in the webdriver folder.
+Do download proper supported version of driver according to your device.
 
-After that go to your browser and search "My user agent" and copy/paste your user agent in "sel.py >> user_agent"
+It is also necessary to update the locations so just make sure all the paths for files and folders are set right.
 
-And VOILA !!  Run main.py on your terminal
+Then finally to run, enter
 ```
 python main.py
 ```
+The script will display the update log in the terminal itself.
+
+All the data will be stored in the `textfiles/<filename>` and `images/<filename>`
+
+Some glimpses:
+
 
 ## Remember
 1. Your images will be saved in the folder called "data / <your_search>" eg. data / jamie_clayton
-2. This program was developed on win10/64bits. For other platforms all you need to do is:
+2. This program was developed on win11/64bits. For other platforms all you need to do is:
     - change the driver
     - update your user_agent
     - necessary changes in path syntax
